@@ -10,24 +10,31 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('About GetX'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'GetX is an extra-light and powerful solution for Flutter. It combines high performance state management, intelligent dependency injection, and route management in a quick and practical way.',
+      body: WillPopScope(
+        onWillPop: tryPop,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'GetX is an extra-light and powerful solution for Flutter. It combines high performance state management, intelligent dependency injection, and route management in a quick and practical way.',
+                ),
               ),
-            ),
-            FlatButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text('Go Home'))
-          ],
+              TextButton(onPressed: doPop, child: Text('Go Home'))
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> tryPop() async {
+    return true;
+  }
+
+  void doPop() {
+    Get.back();
   }
 }
